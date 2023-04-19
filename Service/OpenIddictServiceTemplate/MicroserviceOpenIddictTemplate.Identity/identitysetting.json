@@ -53,7 +53,8 @@
     "GrandTypes": [
       "refresh_token",
       "authorization_code",
-      "client_credentials"
+      "client_credentials",
+      "password"
     ]
   }, 
   

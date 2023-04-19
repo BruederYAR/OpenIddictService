@@ -74,6 +74,11 @@ namespace MicroserviceOpenIddictTemplate.Identity.Definitions.Swagger
                                 Scopes = scopes,
                                 TokenUrl = new Uri($"{url}/connect/token", UriKind.Absolute),
                             },
+                            Password = new OpenApiOAuthFlow
+                            {
+                                TokenUrl = new Uri($"{url}/connect/token", UriKind.Absolute),
+                                Scopes = scopes,
+                            }
                         },
                         Type = SecuritySchemeType.OAuth2
                     }
