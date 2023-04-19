@@ -63,7 +63,7 @@ namespace MicroserviceOpenIddictTemplate.DAL.Database
             if (!_context!.Users.Any(u => u.UserName == admin.UserName)) //Проверка на то, что админ уже существует
             {
                 var password = new PasswordHasher<ApplicationUser>();
-                admin.PasswordHash = password.HashPassword(admin, "qwe123!@#");
+                admin.PasswordHash = password.HashPassword(admin, adminFromConfig.Password);
                 
                 var userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
                 var userResult = await userManager.CreateAsync(admin);
