@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Validation.AspNetCore;
+using Serilog;
 
 namespace MicroserviceOpenIddictTemplate.Identity.Endpoints.Account;
 
@@ -31,6 +32,7 @@ public class AccountDefinition : Definition
         var user = httpContextAccessor.HttpContext!.User;
         var claims = ((ClaimsIdentity)user.Identity!).Claims;
         var result = claims.Select(x => new { Type = x.Type, ValueType = x.ValueType, Value = x.Value });
+        Log.Information($"Current user {user.Identity.Name} have following climes {result}");
         return Results.Ok(result);
     }
 
@@ -39,10 +41,11 @@ public class AccountDefinition : Definition
     [FeatureGroupName("Account")]
     private async Task<IResult> Register(
         [FromBody] RegisterViewModel model,
-        IAccountService accountService,
-        CancellationToken cancellationToken)
+        [FromServices] IAccountService accountService,
+        [FromServices] CancellationToken cancellationToken)
     {
         var userProfile = await accountService.RegisterAsync(model, cancellationToken);
+        Log.Information($"{userProfile.FirstName} {userProfile.LastName} has be registered");
         return Results.Ok(userProfile);
     }
 }
