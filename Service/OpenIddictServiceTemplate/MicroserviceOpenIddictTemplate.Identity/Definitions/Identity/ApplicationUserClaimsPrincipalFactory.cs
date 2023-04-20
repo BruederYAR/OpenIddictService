@@ -44,23 +44,23 @@ public class ApplicationUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<
         {
             ((ClaimsIdentity)principal.Identity!).AddClaim(new Claim(OpenIddictConstants.Claims.FamilyName, user.LastName));
         }
-        if (!string.IsNullOrEmpty(user.Email) &&
+        if (!string.IsNullOrWhiteSpace(user.Email) &&
             string.IsNullOrEmpty(ClaimsHelper.GetValue<string>(claimIdentity,OpenIddictConstants.Claims.Email)))
         {
             ((ClaimsIdentity)principal.Identity!).AddClaim(new Claim(OpenIddictConstants.Claims.Email, user.Email));
         }
-        if (!string.IsNullOrEmpty(user.PhoneNumber) &&
+        if (!string.IsNullOrWhiteSpace(user.PhoneNumber) &&
             string.IsNullOrEmpty(ClaimsHelper.GetValue<string>(claimIdentity,OpenIddictConstants.Claims.PhoneNumber)))
         {
             ((ClaimsIdentity)principal.Identity!).AddClaim(new Claim(OpenIddictConstants.Claims.PhoneNumber, user.PhoneNumber));
         }
-        if(!string.IsNullOrEmpty(user.Id.ToString()) &&
+        if(!string.IsNullOrWhiteSpace(user.Id.ToString()) &&
            string.IsNullOrEmpty(ClaimsHelper.GetValue<string>(claimIdentity,OpenIddictConstants.Claims.Subject)))
         {
             ((ClaimsIdentity)principal.Identity!).AddClaim(new Claim(OpenIddictConstants.Claims.Subject, user.Id.ToString()));
         }
 
-        if (string.IsNullOrEmpty(ClaimsHelper.GetValue<string>(claimIdentity, OpenIddictConstants.Claims.Role)))
+        if (string.IsNullOrWhiteSpace(ClaimsHelper.GetValue<string>(claimIdentity, OpenIddictConstants.Claims.Role)))
         {
             principal.SetClaims(OpenIddictConstants.Claims.Role, (await _userManager.GetRolesAsync(user)).ToImmutableArray());
         }

@@ -28,16 +28,6 @@ public class AuthorizationDefinition : Definition
                 options.LoginPath = "/connect/login";
             });
 
-        /*
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme, policy =>
-            {
-                policy.RequireAuthenticatedUser();
-            });
-        });
-        */
-
         services.AddAuthorization();
         services.AddSingleton<IAuthorizationPolicyProvider, AuthorizationPolicyProvider>();
         services.AddSingleton<IAuthorizationHandler, AppPermissionHandler>();
