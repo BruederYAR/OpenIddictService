@@ -1,8 +1,8 @@
-﻿using MicroserviceOpenIddictTemplate.Identity.Base.Attributes;
+﻿using MicroserviceOpenIddictTemplate.DAL.Domain;
+using MicroserviceOpenIddictTemplate.Identity.Base.Attributes;
 using MicroserviceOpenIddictTemplate.Identity.Base.Definition;
 using MicroserviceOpenIddictTemplate.Identity.Definitions.Options.Models;
 using Microsoft.Extensions.Options;
-using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -16,17 +16,17 @@ namespace MicroserviceOpenIddictTemplate.Identity.Definitions.Swagger
         {
             services.AddSwaggerGen(options =>
             {
-                //Описание свагера
+                // Swagger description
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Identity Service Api",
-                    Version = "v1",
-                    Description = "Identity Service Api"
+                    Title = AppData.ServiceName,
+                    Version = AppData.ServiceVersion,
+                    Description = AppData.ServiceDescription
                 });
                 
                 options.ResolveConflictingActions(x => x.First());
                 
-                //Заголовки контроллеров
+                // Controllers titles
                 options.TagActionsBy(api =>
                 {
                     string tag;
@@ -48,14 +48,14 @@ namespace MicroserviceOpenIddictTemplate.Identity.Definitions.Swagger
                     return tags;
                 });
                 
-                var configurationBuilder = new ConfigurationBuilder();
-                configurationBuilder.SetBasePath(Directory.GetCurrentDirectory());
-                configurationBuilder.AddJsonFile("identitysetting.json");
-                IConfiguration identityConfiguration = configurationBuilder.Build();
+                var identityConfiguration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("identitysetting.json")
+                    .Build();
                 
                 var url = identityConfiguration.GetSection("IdentityServerUrl").GetValue<string>("Authority");
                 
-                //Вытаскиваем скопы для AddSecurityDefinition 
+                // Get scopes for AddSecurityDefinition 
                 var scopesList = identityConfiguration.GetSection("Scopes").Get<List<IdentityScopeOption>>();
                 var scopes = scopesList!.ToDictionary(x => x.Name, x => x.Description);
 
@@ -106,10 +106,11 @@ namespace MicroserviceOpenIddictTemplate.Identity.Definitions.Swagger
 
         public override void ConfigureApplicationAsync(WebApplication app)
         {
-            // if (!app.Environment.IsDevelopment())
-            // {
-            //     return;
-            // }
+            if (!app.Environment.IsDevelopment())
+            {
+                return;
+            }
+            
             using var scope = app.Services.CreateAsyncScope();
             var url = scope.ServiceProvider.GetService<IOptions<IdentityAddressOption>>()!.Value.Authority;
             var client = scope.ServiceProvider.GetService<IOptions<IdentityClientOption>>()!.Value;

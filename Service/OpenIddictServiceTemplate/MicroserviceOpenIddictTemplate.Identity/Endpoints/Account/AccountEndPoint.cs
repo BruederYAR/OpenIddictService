@@ -3,21 +3,17 @@ using MicroserviceOpenIddictTemplate.DAL.Domain;
 using MicroserviceOpenIddictTemplate.Identity.Application.Services;
 using MicroserviceOpenIddictTemplate.Identity.Base.Attributes;
 using MicroserviceOpenIddictTemplate.Identity.Base.Definition;
-using MicroserviceOpenIddictTemplate.Identity.Base.Helpers;
 using MicroserviceOpenIddictTemplate.Identity.Endpoints.Account.ViewModel;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OpenIddict.Validation.AspNetCore;
 using Serilog;
 
 namespace MicroserviceOpenIddictTemplate.Identity.Endpoints.Account;
 
-public class AccountDefinition : Definition
+public class AccountEndPoint : Definition
 {
     public override void ConfigureApplicationAsync(WebApplication app)
     {
-        //app.MapGet("~/connect/login", Login).ExcludeFromDescription();
         app.MapPost("~/api/account/register", Register).WithOpenApi();
         app.MapGet("~/api/account/getclaims", GetClaims).WithOpenApi();
     }

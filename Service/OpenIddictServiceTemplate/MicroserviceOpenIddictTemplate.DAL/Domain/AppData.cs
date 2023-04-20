@@ -16,5 +16,10 @@ public static class AppData
     /// Current service description
     /// </summary>
     public const string ServiceDescription = "OpenIddict service with OpenID Connect server and Token Validation";
+    
+    /// <summary>
+    /// Current service version
+    /// </summary>
+    public const string ServiceVersion = "f7v1";
 
 }

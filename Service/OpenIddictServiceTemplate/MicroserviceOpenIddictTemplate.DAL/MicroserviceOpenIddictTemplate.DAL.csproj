@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Database\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MicroserviceOpenIddictTemplate.Base\MicroserviceOpenIddictTemplate.Base.csproj" />
   </ItemGroup>
 

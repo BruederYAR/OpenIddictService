@@ -12,7 +12,7 @@ using OpenIddict.Server.AspNetCore;
 
 namespace MicroserviceOpenIddictTemplate.Identity.Endpoints.Connect;
 
-public class ConnectDefinition : Definition
+public class ConnectEndPoint : Definition
 {
     public override void ConfigureApplicationAsync(WebApplication app)
     {
