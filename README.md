@@ -1,5 +1,22 @@
 # OpendIddict Service
 
+This project is a flexible implementation of microservice architecture with OpenIddict authentication server
+
+Implemented next stack:
+- Definition. Simple "Vertical Slice architecture"
+- Reposytory
+- UnitOfWork
+- OpenIddict
+- AuthoMapper
+- Swagger with identity
+- IOption 
+
+More information on OpenIddict can be found [here](https://documentation.openiddict.com/)
+
+More OpenIddictTemplate [here](https://github.com/openiddict/openiddict-samples)
+
+The template idea was taken from [Calabonga](https://github.com/Calabonga/Microservice-Template)
+
 <br>
 
 ---
