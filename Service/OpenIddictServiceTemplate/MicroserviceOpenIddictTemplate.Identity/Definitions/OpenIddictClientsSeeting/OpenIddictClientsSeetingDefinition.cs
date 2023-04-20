@@ -54,11 +54,12 @@ public class OpenIddictClientsSeetingDefinition : Definition
             client.AddScopes(clientOption.Scopes);
             client.AddGrandTypes(clientOption.GrandTypes);
             
-            client.AddResponseTypes();
-            client.AddEndpoints();
-            
+            client.AddRedirectUris(clientOption.RedirectUris);
             client.AddRedirectUrisForTesting(url);
             
+            client.AddResponseTypes();
+            client.AddEndpoints();
+
             await manager.CreateAsync(client);
         }
     }

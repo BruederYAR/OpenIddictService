@@ -3,10 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# secrets
-Service/OpenIddictServiceTemplate/MicroserviceOpenIddictTemplate.Identity/identitysetting.json
-**/appsettings.Development.json
-appsettings.Development.json
 
 # dotsetting
 MicroserviceOpenIddictTemplate.sln.DotSettings.user

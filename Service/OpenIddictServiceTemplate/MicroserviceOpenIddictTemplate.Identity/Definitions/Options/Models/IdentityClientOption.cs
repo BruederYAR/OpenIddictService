@@ -7,5 +7,6 @@ public class IdentityClientOption
     public string Secret { get; set; } = null!;
     public string? ConsentType { get; set; }
     public List<string>? GrandTypes { get; set; }
+    public List<string>? RedirectUris { get; set; }
     public List<string>? Scopes { get; set; }
 }

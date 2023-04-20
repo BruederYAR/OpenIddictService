@@ -62,4 +62,17 @@ public static class OpenIddictApplicationDescriptorExtensions
         application.RedirectUris.Add(new Uri("https://localhost:20001/swagger/oauth2-redirect.html"));  // https://swagger.io/ for mobile
         application.RedirectUris.Add(new Uri("https://localhost:8001/swagger/oauth2-redirect.html"));   // https://localhost:8001 Microservice Template
     }
+
+    public static void AddRedirectUris(this OpenIddictApplicationDescriptor application, List<string>? uris)
+    {
+        if (uris is null)
+        {
+            return;
+        }
+
+        foreach (var url in uris)
+        {
+            application.RedirectUris.Add(new Uri(url));
+        }
+    }
 }

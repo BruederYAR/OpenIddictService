@@ -98,7 +98,8 @@ public class ConnectEndPoint : Definition
         type: OpenIddictConstants.AuthorizationTypes.Permanent,
         scopes: iddictRequest.GetScopes()).ToListAsync();
 
-        return await ConnectHelper.Authorize(applicationManager, scopeManager, authorizationManager,
+        return await ConnectHelper.Authorize(
+            applicationManager, scopeManager, authorizationManager,
             signInManager, userManager, application, authorizations,
             user, applicationId, iddictRequest);
     }
